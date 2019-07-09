@@ -1,5 +1,6 @@
 ﻿using MarsRovers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace MarsRoversTest
 {
@@ -12,8 +13,8 @@ namespace MarsRoversTest
             IPlateau area = new Plateau("5 5");
             RoverSet searcherTeam = new RoverSet(area);
 
-            searcherTeam.AddSearcher("1 2 N", "LMLMLMLMM");
-            searcherTeam.AddSearcher("3 3 E", "MMRMMRMRRM");
+            searcherTeam.AddRover("1 2 N", "LMLMLMLMM");
+            searcherTeam.AddRover("3 3 E", "MMRMMRMRRM");
 
             Assert.IsTrue(searcherTeam.Count == 2);
 
@@ -30,8 +31,8 @@ namespace MarsRoversTest
             IPlateau area = new Plateau("5 5");
             RoverSet roverTeam = new RoverSet(area);
 
-            roverTeam.AddSearcher("1 2 N", "LMLMLMLMM");
-            roverTeam.AddSearcher("3 3 E", "MMRMMRMRRM");
+            roverTeam.AddRover("1 2 N", "LMLMLMLMM");
+            roverTeam.AddRover("3 3 E", "MMRMMRMRRM");
 
             IRover first = roverTeam[0];
             IRover second = roverTeam[1];
@@ -43,6 +44,15 @@ namespace MarsRoversTest
             Assert.IsTrue(second.XCoordinate == 5);
             Assert.IsTrue(second.YCoordinate == 1);
             Assert.IsTrue(second.Direction == Common.Direction.East);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void DeployRoversAndTestCoordinatesOutOfRange()
+        {
+            IPlateau area = new Plateau("5 5");
+            RoverSet roverTeam = new RoverSet(area);
+            roverTeam.AddRover("1 2 N", "MMMMMMMM");
         }
     }
 }

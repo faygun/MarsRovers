@@ -14,7 +14,7 @@ namespace MarsRovers
             Plateau = plateau;
         }
 
-        public void AddSearcher(string positions, string commands)
+        public void AddRover(string positions, string commands)
         {
             this.Add(new Rover(this.Plateau, positions, commands));
         }

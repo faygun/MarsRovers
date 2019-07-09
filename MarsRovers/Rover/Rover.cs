@@ -14,11 +14,14 @@ namespace MarsRovers
         public Rover(IPlateau plateau, string points, string commands)
         {
             if (!checkPlateau(plateau))
-                return;
+                throw new ArgumentOutOfRangeException();
 
             prepareCoordinate(points);
-
+            
             Move(commands);
+
+            if (XCoordinate > plateau.Width || YCoordinate > plateau.Height)
+                throw new ArgumentOutOfRangeException();
         }
 
         #region private methods

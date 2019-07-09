@@ -14,7 +14,7 @@ namespace MarsRovers
             var plateauCoordinate = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(plateauCoordinate))
-                return;
+                throw new ArgumentException();
 
             var width = 0;
             var height = 0;
@@ -25,21 +25,21 @@ namespace MarsRovers
                 int.TryParse(arrayplateauCoordinate[1], out height);
             }
 
-            RoverSet searchTeam = new RoverSet(new Plateau(width, height));
+            RoverSet roverSet = new RoverSet(new Plateau(width, height));
 
             Console.WriteLine("Please insert rover's coordinate and direction");
             var roverCoordinateAndDirection = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(roverCoordinateAndDirection))
-                return;
+                throw new ArgumentException();
 
             Console.WriteLine("Please insert rover's command");
             var roverCommand = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(roverCommand))
-                return;
+                throw new ArgumentException();
 
-            searchTeam.AddSearcher(roverCoordinateAndDirection, roverCommand); //1 2 W
+            roverSet.AddRover(roverCoordinateAndDirection, roverCommand); //1 2 W
 
-            Console.WriteLine(string.Format("firstRover position and direction : {0} {1} {2}", searchTeam[0].XCoordinate, searchTeam[0].YCoordinate, searchTeam[0].Direction));
+            Console.WriteLine(string.Format("Rover position and direction : {0} {1} {2}", roverSet[0].XCoordinate, roverSet[0].YCoordinate, roverSet[0].Direction));
             Console.ReadLine();
         }
     }
